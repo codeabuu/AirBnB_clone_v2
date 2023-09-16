@@ -62,13 +62,12 @@ class BaseModel:
 
     def to_dict(self):
         """Convert instance into dict format"""
-        dct = self.__dict__.copy()
+        dct = {
+                key: value.isoformat() if isinstance(value, datetime) else value
+                for key, value in self.__dict__.items()
+                }
         dct['__class__'] = self.__class__.__name__
-        for k in dct:
-            if type(dct[k]) is datetime:
-                dct[k] = dct[k].isoformat()
-        if '_sa_instance_state' in dct.keys():
-            del(dct['_sa_instance_state'])
+        dct.pop('_sa_instance_state', None)
         return dct
 
     def delete(self):
