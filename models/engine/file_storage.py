@@ -8,16 +8,28 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
+    def all(self, cls=None):
+        """Returns a dictionary of models currently in storage"""
+        if cls is None:
+            return self.__objects
+        cls_name = cls.__name__
+        dct = {}
+        for key in self.__objects.keys():
+            if key.split('.')[0] == cls_name:
+                dct[key] = self.__objects[key]
+        return dct
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
-        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
+        self.__objects.update(
+            {obj.to_dict()['__class__'] + '.' + obj.id: obj}
+            )
 
     def save(self):
         """Saves storage dictionary to file"""
-        with open(FileStorage.__file_path, 'w') as f:
+        with open(self.__file_path, 'w') as f:
             temp = {}
-            temp.update(FileStorage.__objects)
+            temp.update(self.__objects)
             for key, val in temp.items():
                 temp[key] = val.to_dict()
             json.dump(temp, f)
@@ -39,23 +51,23 @@ class FileStorage:
                   }
         try:
             temp = {}
-            with open(FileStorage.__file_path, 'r') as f:
+            with open(self.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+
     def delete(self, obj=None):
         ''' deletes the object obj from the attribute
-        __objects if it's inside it
+            __objects if it's inside it
         '''
-        if obj is not None:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            self.__objects.pop(key, None)
-    def all(self, cls=None):
-        """Returns a list of objects of a specific class or all objects if cls is None"""
-        if cls is None:
-            return self.__objects
-        cls_name = cls.__name__
-        return {key: obj for key, obj in self.__objects.items()\
-                if key.split('.')[0] == cls_name}
+        if obj is None:
+            return
+        obj_key = obj.to_dict()['__class__'] + '.' + obj.id
+        if obj_key in self.__objects.keys():
+            del self.__objects[obj_key]
+
+    def close(self):
+        """Call the reload method"""
+        self.reload()
