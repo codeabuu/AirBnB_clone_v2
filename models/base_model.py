@@ -35,11 +35,11 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            for k in kwargs:
+            for k, v in kwargs.items():
                 if k in ['created_at', 'updated_at']:
-                    setattr(self, k, datetime.fromisoformat(kwargs[k]))
+                    setattr(self, k, datetime.fromisoformat(v))
                 elif k != '__class__':
-                    setattr(self, k, kwargs[k])
+                    setattr(self, k, v)
             if storage_type == 'db':
                 if not hasattr(kwargs, 'id'):
                     setattr(self, 'id', str(uuid.uuid4()))
