@@ -10,7 +10,13 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """A base class for all hbnb models"""
+    """A base class for all hbnb models
+
+    Attributes:
+        id (sqlalchemy String): The BaseModel id.
+        created_at (sqlalchemy DateTime): The datetime at creation.
+        updated_at (sqlalchemy DateTime): The datetime of last update.
+    """
     id = Column(String(60),
                 nullable=False,
                 primary_key=True,
@@ -21,7 +27,7 @@ class BaseModel:
     updated_at = Column(DATETIME,
                         nullable=False,
                         default=datetime.utcnow())
-    
+
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
@@ -29,24 +35,23 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            for k, v in kwargs.items():
+            for k in kwargs:
                 if k in ['created_at', 'updated_at']:
-                    setattr(self, k, datetime.fromisoformat(kwargs[v]))
+                    setattr(self, k, datetime.fromisoformat(kwargs[k]))
                 elif k != '__class__':
-                    setattr(self, k, v)
+                    setattr(self, k, kwargs[k])
             if storage_type == 'db':
-                if 'id' not in kwargs:
+                if not hasattr(kwargs, 'id'):
                     setattr(self, 'id', str(uuid.uuid4()))
-                if 'created_at' not in kwargs:
+                if not hasattr(kwargs, 'created_at'):
                     setattr(self, 'created_at', datetime.now())
-                if 'updated_at' not in kwargs:
+                if not hasattr(kwargs, 'updated_at'):
                     setattr(self, 'updated_at', datetime.now())
 
     def __str__(self):
         """Returns a string representation of the instance"""
-        cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         return '[{}] ({}) {}'.format(
-                self.__class__.__name__, self.id, self.__dict__)
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
@@ -59,20 +64,12 @@ class BaseModel:
         """Convert instance into dict format"""
         dct = self.__dict__.copy()
         dct['__class__'] = self.__class__.__name__
-
-        for key, value in dct.items():
-            if isinstance(value, datetime):
-                dct[key] = value.isoformat()
-
-        dct.pop('_sa_instance_state', None)
+        for k in dct:
+            if type(dct[k]) is datetime:
+                dct[k] = dct[k].isoformat()
+        if '_sa_instance_state' in dct.keys():
+            del(dct['_sa_instance_state'])
         return dct
-
-    def save(self):
-        """Updates updated_at with current time when instance is changed"""
-        from models import storage
-        self.updated_at = datetime.now()
-        storage.new(self)
-        storage.save()
 
     def delete(self):
         '''deletes the current instance from the storage'''
