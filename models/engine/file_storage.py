@@ -52,6 +52,8 @@ class FileStorage:
         ''' deletes the object obj from the attribute
         __objects if it's inside it
         '''
-        if obj and hasattr(obj, 'id'):
-            obj_key = f"{obj.__class__.__name__}.{obj.id}"
-            self.__objects.pop(obj_key, None)
+        if obj is None:
+            return
+        obj_key = obj.to_dict()['__class__'] + '.' + obj.id
+        if obj_key in self.__objects.keys():
+            del self.__objects[obj_key]
