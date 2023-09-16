@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DATETIME
 from models import storage_type
 
-Base = declarative_base
+Base = declarative_base()
 
 
 class BaseModel:
@@ -19,7 +19,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         def_attr = {
-                'id': str(uuid.uuid4())
+                'id': str(uuid.uuid4()),
                 'created_at': datetime.now(),
                 'updated_at': datetime.now(),
                 }
