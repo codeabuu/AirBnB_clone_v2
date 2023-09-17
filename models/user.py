@@ -10,7 +10,11 @@ class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
 
-    email = Column(String(128), nullable=False) if storage_type == 'db' else ""
+    email = (
+            Column(String(128), nullable=False)
+            if storage_type == 'db'
+            else ""
+            )
     password = Column(String(128), nullable=False) if storage_type == 'db' else ""
     first_name = Column(String(128), nullable=True) if storage_type == 'db' else ""
     last_name = Column(String(128), nullable=True) if storage_type == 'db' else ""
