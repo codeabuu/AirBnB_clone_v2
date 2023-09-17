@@ -32,11 +32,6 @@ class User(BaseModel, Base):
             )
 
     if storage_type == 'db':
-        places = relationship('Place',
-                backref='user',
-                cascade='all,
-                delete, delete-orphan')
-        reviews = relationship('Review',
-                backref='user',
-                cascade='all,
-                delete, delete-orphan')
+        places = relationship('Place', backref='user', cascade='all, delete, delete-orphan')
+        reviews = relationship('Review', backref='user', cascade='all, delete, delete-orphan')
+
