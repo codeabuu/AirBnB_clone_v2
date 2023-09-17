@@ -63,7 +63,8 @@ class BaseModel:
     def to_dict(self):
         """Convert instance into dict format"""
         dct = {
-                key: value.isoformat() if isinstance(value, datetime) else value
+                key: value.isoformat()
+                if isinstance(value, datetime) else value
                 for key, value in self.__dict__.items()
                 }
         dct['__class__'] = self.__class__.__name__
