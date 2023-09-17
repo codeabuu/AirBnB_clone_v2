@@ -33,12 +33,7 @@ class Place(BaseModel, Base):
     number_rooms = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
     number_bathrooms = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
     max_guest = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
-    price_by_night = Column(
-            Integer,
-            nullable=False,
-            default=0
-            )
-    if storage_type == 'db' else 0
+    price_by_night = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
     latitude = Column(Float, nullable=True) if storage_type == 'db' else 0.0
     longitude = Column(Float, nullable=True) if storage_type == 'db' else 0.0
 
