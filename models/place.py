@@ -27,19 +27,55 @@ class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
     city_id = (
-            Column(String(60), ForeignKey('cities.id'), nullable=False) 
+            Column(String(60), ForeignKey('cities.id'), nullable=False)
             if storage_type == 'db'
             else ""
             )
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False) if storage_type == 'db' else ""
-    name = Column(String(128), nullable=False) if storage_type == 'db' else ""
-    description = Column(String(1024), nullable=True) if storage_type == 'db' else ""
-    number_rooms = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
-    number_bathrooms = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
-    max_guest = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
-    price_by_night = Column(Integer, nullable=False, default=0) if storage_type == 'db' else 0
-    latitude = Column(Float, nullable=True) if storage_type == 'db' else 0.0
-    longitude = Column(Float, nullable=True) if storage_type == 'db' else 0.0
+    user_id = (
+            Column(String(60), ForeignKey('users.id'), nullable=False)
+            if storage_type == 'db'
+            else ""
+            )
+    name = (
+            Column(String(128), nullable=False)
+            if storage_type == 'db'
+            else ""
+            )
+    description = (
+            Column(String(1024), nullable=True)
+            if storage_type == 'db'
+            else ""
+            )
+    number_rooms = (
+            Column(Integer, nullable=False, default=0)
+            if storage_type == 'db'
+            else 0
+            )
+    number_bathrooms = (
+            Column(Integer, nullable=False, default=0)
+            if storage_type == 'db'
+            else 0
+            )
+    max_guest = (
+            Column(Integer, nullable=False, default=0)
+            if storage_type == 'db'
+            else 0
+            )
+    price_by_night = (
+            Column(Integer, nullable=False, default=0)
+            if storage_type == 'db'
+            else 0
+            )
+    latitude = (
+            Column(Float, nullable=True)
+            if storage_type == 'db'
+            else 0.0
+            )
+    longitude = (
+            Column(Float, nullable=True)
+            if storage_type == 'db'
+            else 0.0
+            )
 
     if storage_type == 'db':
         reviews = relationship(
