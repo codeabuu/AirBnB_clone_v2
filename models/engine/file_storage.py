@@ -14,9 +14,9 @@ class FileStorage:
             return self.__objects
         cls_name = cls.__name__
         dct = {}
-        for key in self.__objects.keys():
+        for key, value in self.__objects.keys():
             if key.split('.')[0] == cls_name:
-                dct[key] = self.__objects[key]
+                dct[key] = value
         return dct
 
     def new(self, obj):
