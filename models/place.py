@@ -26,7 +26,11 @@ if storage_type == 'db':
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
-    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False) if storage_type == 'db' else ""
+    city_id = (
+            Column(String(60), ForeignKey('cities.id'), nullable=False) 
+            if storage_type == 'db'
+            else ""
+            )
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False) if storage_type == 'db' else ""
     name = Column(String(128), nullable=False) if storage_type == 'db' else ""
     description = Column(String(1024), nullable=True) if storage_type == 'db' else ""
