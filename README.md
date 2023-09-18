@@ -5,7 +5,24 @@
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 ---
+## Files
+All of the following files are programs written in C:
 
+| Filename | Description |
+| -------- | ----------- |
+| ` 0-square.py` 0. My first square.|
+| ` 1-square.py` | 1. Square with size.|
+| ` 2-square.py` | 2. Size validation|
+| ` 3-square.py` | 3. Area of a square.|
+| ` 4-square.py` | 4. Access and update private attribute.|
+| ` 5-square.py` | 5. Printing a square.|
+| ` 6-square.py` | 6. Coordinates of a square.|
+| ` 100-singly_linked_list.py` | 7. Singly linked list|
+| ` 101-square.py` | 8. Print Square instance.|
+| ` 102-square.py` | 9. Compare 2 squares.|
+| ` 103-python.c` | 10. ByteCode -> Python #5.|
+
+---
 <center><h3>Repository Contents by Project Task</h3> </center>
 
 | Tasks | Files | Description |
