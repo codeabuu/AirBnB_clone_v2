@@ -67,3 +67,13 @@ Advanced syntax is implemented for the following commands:
 <br>
 <center> <h2>Examples</h2> </center>
 <h3>Primary Command Syntax</h3>
+###### Example 0: Create an object
+Usage: create <class_name>
+```
+(hbnb) create BaseModel
+```
+```
+(hbnb) create BaseModel
+3aa5babc-efb6-4041-bfe9-3cc9727588f8
+(hbnb)
+```
