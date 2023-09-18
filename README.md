@@ -63,3 +63,7 @@ Advanced syntax is implemented for the following commands:
 	* destroy - Destroys an object based on class and UUID
 
     * update - Updates existing attributes an object based on class name and UUID
+    <br>
+<br>
+<center> <h2>Examples</h2> </center>
+<h3>Primary Command Syntax</h3>
