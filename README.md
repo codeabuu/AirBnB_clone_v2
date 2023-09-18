@@ -10,8 +10,8 @@ All of the following files are programs written in C:
 
 | Filename | Description |
 | -------- | ----------- |
-| ` 0-square.py` 0. My first square.|
-| ` 1-square.py` | 1. Square with size.|
+| `0. Fork me if you can!` work on an existing codebase 90% of the time.|
+| ` 1. Bug free!` | codebase contains many test cases.|
 | ` 2-square.py` | 2. Size validation|
 | ` 3-square.py` | 3. Area of a square.|
 | ` 4-square.py` | 4. Access and update private attribute.|
