@@ -14,7 +14,7 @@ All of the following files are programs written in C:
 | ` 1. Bug free!` | codebase contains many test cases.|
 | ` 2. Console improvements` | Update the def do_create(self, arg):|
 | ` 3. MySQL setup development` | Write a script that prepares a MySQL server for the project:|
-| ` 4-square.py` | 4. Access and update private attribute.|
+| ` 4. MySQL setup test | |Write a script that prepares a MySQL server for the project:A database hbnb_test_db|
 | ` 5-square.py` | 5. Printing a square.|
 | ` 6-square.py` | 6. Coordinates of a square.|
 | ` 100-singly_linked_list.py` | 7. Singly linked list|
