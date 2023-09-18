@@ -77,3 +77,12 @@ Usage: create <class_name>
 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb)
 ```
+###### Example 1: Show an object
+Usage: show <class_name> <_id>
+
+```
+(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+[BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959),
+'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
+(hbnb)
+```
