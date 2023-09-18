@@ -13,7 +13,7 @@ All of the following files are programs written in C:
 | `0. Fork me if you can!` work on an existing codebase 90% of the time.|
 | ` 1. Bug free!` | codebase contains many test cases.|
 | ` 2. Console improvements` | Update the def do_create(self, arg):|
-| ` 3-square.py` | 3. Area of a square.|
+| ` 3. MySQL setup development` | Write a script that prepares a MySQL server for the project:|
 | ` 4-square.py` | 4. Access and update private attribute.|
 | ` 5-square.py` | 5. Printing a square.|
 | ` 6-square.py` | 6. Coordinates of a square.|
