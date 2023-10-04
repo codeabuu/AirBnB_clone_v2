@@ -12,45 +12,40 @@ env.key_filename = '~/.ssh/mykey'
 
 
 def do_deploy(archive_path):
-        """Deploy web files to server
-        """
-        try:
-                if not (path.exists(archive_path)):
-                        return False
+    """Deploy web files to server
+    """
+    try:
+        if not (path.exists(archive_path)):
+            return False
 
-                # upload archive
-                put(archive_path, '/tmp/')
+        # Upload archive
+        put(archive_path, '/tmp/')
 
-                # create target dir
-                timestamp = archive_path[-18:-4]
-                run('sudo mkdir -p /data/web_static/\
-releases/web_static_{}/'.format(timestamp))
+        # Create target dir
+        timestamp = archive_path[-18:-4]
+        target_dir = '/data/web_static/releases/web_static_{}/'.format(timestamp)
+        run('sudo mkdir -p {}'.format(target_dir))
 
-                # uncompress archive and delete .tgz
-                run('sudo tar -xzf /tmp/web_static_{}.tgz -C \
-/data/web_static/releases/web_static_{}/'
-                    .format(timestamp, timestamp))
+        # Uncompress archive
+        run('sudo tar -xzf /tmp/web_static_{}.tgz -C {}'.format(timestamp, target_dir))
 
-                # remove archive
-                run('sudo rm /tmp/web_static_{}.tgz'.format(timestamp))
+        # Remove archive
+        run('sudo rm /tmp/web_static_{}.tgz'.format(timestamp))
 
-                # move contents into host web_static
-                run('sudo mv /data/web_static/releases/web_static_{}/web_static/* \
-/data/web_static/releases/web_static_{}/'.format(timestamp, timestamp))
+        # Use rsync to move contents (recursively) into the host web_static
+        run('sudo rsync -a /data/web_static/releases/web_static_{}/web_static/ {}'.format(timestamp, target_dir))
 
-                # remove extraneous web_static dir
-                run('sudo rm -rf /data/web_static/releases/\
-web_static_{}/web_static'
-                    .format(timestamp))
+        # Remove source_dir
+        run('sudo rm -rf {}/web_static/'.format(target_dir))
 
-                # delete pre-existing sym link
-                run('sudo rm -rf /data/web_static/current')
+        # Delete pre-existing symbolic link
+        run('sudo rm -rf /data/web_static/current')
 
-                # re-establish symbolic link
-                run('sudo ln -s /data/web_static/releases/\
-web_static_{}/ /data/web_static/current'.format(timestamp))
-        except:
-                return False
+        # Re-establish symbolic link
+        run('sudo ln -s {} /data/web_static/current'.format(target_dir))
+    except:
+        return False
 
-        # return True on success
-        return True
+    # Return True on success
+    return True
+
