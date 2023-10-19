@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+## WEB FLASK
+=======
 **0x04. AirBnB clone - Web framework**
 Python
 Back-end
@@ -898,3 +901,4 @@ GitHub repository: AirBnB_clone_v2
 File: web_flask/100-hbnb.py, web_flask/templates/100-hbnb.html, web_flask/static/
  
 Copyright © 2023 ALX, All rights reserved.
+>>>>>>> f9514f9aac4d8e43defa940da1bb0dff6431a828
