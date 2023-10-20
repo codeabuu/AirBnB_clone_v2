@@ -19,14 +19,16 @@ def hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def cText(text):
     """display C followed by the value of the text variable"""
-    return "C {}".format(text.replace("_", " "))
+    text = text.replace("_", " ")
+    return "C {}".format(text)
 
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def pythonText(text="is cool"):
     """display Python followed by the value of the text variable"""
-    return "Python {}".format(text.replace("_", " "))
+    txt = text.replace("_", " ")
+    return "Python {}".format(txt)
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
@@ -36,11 +38,16 @@ def isNumber(n):
         return "{} is a number".format(n)
 
 
+def render_no_template(n, template):
+    """display a HTML page only if n is an integer"""
+    if isinstance(n, int):
+        return render_template(template, n=n)
+
+
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n=None):
     """display a HTML page only if n is an integer"""
-    if isinstance(n, int):
-        return render_template("5-number.html", n=n)
+        return render_no_template(n, "5-number.html")
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
