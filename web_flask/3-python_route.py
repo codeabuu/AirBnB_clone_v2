@@ -9,9 +9,9 @@ app = Flask("__name__")
 
 
 @app.route('/', strict_slashes=False)
-def hello():
+def route_hello(text="Hello HBNB!"):
     """Return a given string"""
-    return ("Hello HBNB!")
+    return text
 
 
 @app.route("/hbnb", strict_slashes=False)
