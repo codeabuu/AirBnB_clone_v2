@@ -5,19 +5,26 @@ Your web application must be listening on 0.0.0.0, port 5000
 
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask("__name__")
 
 
-def create_route(route, response):
-    @app.route(route, strict_slashes=False)
-    def route_function():
-        """Return a given string"""
-        return response
+@app.route('/', strict_slashes=False)
+def route_hello():
+    """Return a given string"""
+    return ("Hello HBNB!")
 
 
-create_route('/', "Hello HBNB!")
-create_route('/hbnb', "HBNB")
-create_route('/c/<text>', "C {}")
+@app.route("/hbnb", strict_slashes=False)
+def route_hbnb():
+    """Returns a given string"""
+    return ("HBNB")
+
+
+@app.route("/c/<text>", strict_slashes=False)
+def route_cText(text):
+    """display C followed by the value of the text variable"""
+    return "C {}".format(text.replace("_", " "))
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=None)
