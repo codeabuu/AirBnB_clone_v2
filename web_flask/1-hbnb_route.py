@@ -8,15 +8,16 @@ from flask import Flask
 app = Flask("__name__")
 
 
-def get_response(route, response):
-    @app.route(route, strict_slashes=False)
-    def route_func():
-        '''return a string given'''
-        return response
+@app.route('/', strict_slashes=False)
+def hello():
+    """Return a given string"""
+    return ("Hello HBNB!")
 
 
-get_response('/', "Hello HBNB!")
-get_response('/hbnb', "HBNB")
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """Returns a given string"""
+    return ("HBNB")
 
 
 if __name__ == "__main__":
