@@ -14,6 +14,7 @@ def get_response(route, response):
         '''return a string given'''
         return response
 
+
 get_response('/', "Hello HBNB!")
 get_response('/hbnb', "HBNB")
 
