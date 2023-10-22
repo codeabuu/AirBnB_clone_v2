@@ -9,8 +9,8 @@ app = Flask("__name__")
 
 
 def format_text(text):
-  """Replace underscores with spaces in the given text"""
-  return text.replace("_", " ")
+    """Replace underscores with spaces in the given text"""
+    return text.replace("_", " ")
 
 
 @app.route('/', strict_slashes=False)
