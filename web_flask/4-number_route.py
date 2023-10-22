@@ -8,6 +8,11 @@ from flask import Flask
 app = Flask("__name__")
 
 
+def format_text(text):
+  """Replace underscores with spaces in the given text"""
+  return text.replace("_", " ")
+
+
 @app.route('/', strict_slashes=False)
 def hello():
     """Return a given string"""
@@ -23,14 +28,14 @@ def hbnb():
 @app.route("/c/<text>", strict_slashes=False)
 def cText(text):
     """display C followed by the value of the text variable"""
-    return "C {}".format(text.replace("_", " "))
+    return "C {}".format(format_text(text))
 
 
 @app.route('/python', strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
-def pythonText(text="is cool"):
+def python_Text(text="is cool"):
     """display Python followed by the value of the text variable"""
-    return "Python {}".format(text.replace("_", " "))
+    return "Python {}".format(format_text(text))
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
