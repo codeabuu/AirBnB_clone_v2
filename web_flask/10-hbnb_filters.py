@@ -7,11 +7,17 @@ from flask import render_template
 app = Flask(__name__)
 
 
+def get_all(cls):
+    """will return all classes"""
+    objects = storage.all()
+    return objects
+
+
 @app.route("/hbnb_filters", strict_slashes=False)
 def hbnb_filters():
     """Displays the main HBnB filters HTML page."""
-    states = storage.all("State")
-    amenities = storage.all("Amenity")
+    states = get_all("State")
+    amenities = get_all("Amenity")
     return render_template("10-hbnb_filters.html",
                            states=states, amenities=amenities)
 
