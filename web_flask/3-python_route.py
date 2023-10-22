@@ -5,40 +5,37 @@ Your web application must be listening on 0.0.0.0, port 5000
 
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask("__name__")
 
 
-def route_with_response(route, response=None):
-    def decorator(func):
-        @app.route(route, strict_slashes=False)
-        def wrapper(*args, **kwargs):
-            text = response if response is not None else kwargs.get('text', '')
-            return func(text)
-
-        return wrapper
-
-    return decorator
+def format_text(text):
+    """rep underscores with spaces"""
+    return text.replace("_", " ")
 
 
-@route_with_response('/')
-def hello(text="Hello HBNB!"):
-    return text
+@app.route('/', strict_slashes=False)
+def hello():
+    """Return a given string"""
+    return ("Hello HBNB!")
 
 
-@route_with_response('/hbnb', "HBNB")
-def hbnb(text):
-    return text
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """Returns a given string"""
+    return ("HBNB")
 
 
-@route_with_response('/c/<text>', "C {text}")
+@app.route("/c/<text>", strict_slashes=False)
 def cText(text):
-    return text
+    """display C followed by the value of the text variable"""
+    return "C {}".format(format_text(text))
 
 
-@route_with_response('/python')
-@route_with_response('/python/<text>', "Python {text}")
-def pythonText(text):
-    return text
+@app.route('/python', strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def pythonText(text="is cool"):
+    """display Python followed by the value of the text variable"""
+    return "Python {}".format(format_text(text))
 
 
 if __name__ == "__main__":
