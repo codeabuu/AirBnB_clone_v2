@@ -7,11 +7,13 @@ from flask import Flask
 
 app = Flask(__name__)
 
+
 def create_route(route, response):
     @app.route(route, strict_slashes=False)
     def route_function():
         """Return a given string"""
         return response
+
 
 create_route('/', "Hello HBNB!")
 create_route('/hbnb', "HBNB")
